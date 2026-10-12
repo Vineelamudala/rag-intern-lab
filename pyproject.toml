@@ -1,0 +1,42 @@
+[project]
+name = "rag-intern-lab"
+version = "0.1.0"
+description = "Intern training lab (starter) for the complete Retrieval-Augmented Generation pipeline"
+requires-python = ">=3.12,<3.13"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
+# Integration, model and gateway tests are opt-in. A `-m ...` on the command line
+# replaces this default selection, e.g. `python -m pytest -m m5` includes model tests.
+addopts = "-ra -m \"not integration and not model and not gateway\""
+markers = [
+    "m0: provided infrastructure (should pass before you write code)",
+    "m1: document loading and metadata extraction",
+    "m2: fixed-size chunking and shared chunking helpers",
+    "m3: recursive character chunking",
+    "m4: structure-aware Markdown chunking",
+    "m5: local sentence-transformers embeddings",
+    "m6: ingestion, vector storage and persistence validation",
+    "m7: similarity retrieval and metadata filtering",
+    "m8: RAG context construction and prompt engineering",
+    "m9: LiteLLM gateway integration",
+    "m10: source citations and unanswerable-question handling",
+    "m11: evaluation across the three chunking strategies",
+    "integration: needs PostgreSQL + pgvector (docker compose up -d)",
+    "model: loads the real embedding model (downloads ~90 MB on first run)",
+    "gateway: calls the real LiteLLM gateway configured in .env",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "BLE", "SIM"]
+ignore = ["E501"]  # line length is enforced by `ruff format`; long strings are allowed
+
+[tool.ruff.lint.isort]
+known-first-party = ["rag_lab"]
+known-local-folder = ["conftest", "fakes", "_common"]

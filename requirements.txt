@@ -1,0 +1,22 @@
+# Python 3.12. Install with: python -m pip install -r requirements.txt
+
+# Chunking (M3, M4)
+langchain-text-splitters>=0.3,<2
+
+# Local embeddings only (M5). Pulls in PyTorch (CPU build is fine).
+sentence-transformers>=3.0,<6
+
+# PostgreSQL + pgvector (M0, M6, M7)
+psycopg[binary]>=3.2,<4
+pgvector>=0.3,<0.5
+numpy>=1.26
+
+# Answer generation through the organisation's LiteLLM gateway only (M9)
+litellm>=1.40
+
+# Configuration
+python-dotenv>=1.0
+
+# Testing and static checks
+pytest>=8.0
+ruff>=0.6
